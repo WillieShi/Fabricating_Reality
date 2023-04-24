@@ -1,0 +1,23 @@
+{
+  "name": "trust-gh-pages",
+  "version": "1.0.0",
+  "description": "Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "",
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WillieShi/Fabricating_Reality.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WillieShi/Fabricating_Reality/issues"
+  },
+  "homepage": "https://github.com/WillieShi/Fabricating_Reality#readme",
+  "dependencies": {
+  }
+}
