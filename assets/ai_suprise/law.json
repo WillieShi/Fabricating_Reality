@@ -1,0 +1,19 @@
+{"frames": {
+
+    "law0000":
+    {
+        "frame": {"x":10,"y":10,"w":492,"h":924},
+        "rotated": false,
+        "trimmed": false,
+        "spriteSourceSize": {"x":0,"y":0,"w":492,"h":924},
+        "sourceSize": {"w":512,"h":1024}
+    }},
+    "meta": {
+        "app": "Adobe Animate",
+        "version": "15.2.0.66",
+        "image": "law.png",
+        "format": "RGBA8888",
+        "size": {"w":512,"h":1024},
+        "scale": "1"
+    }
+    }
