@@ -1,4 +1,6 @@
-!["Fabricating Reality"](test.png)
+Fabricating Reality
+![image](https://user-images.githubusercontent.com/27041114/233923529-ff63b368-ae82-4315-9402-c6a77461fbeb.png)
+
 
 #	PLAY IT HERE: [http://ncase.me/trust/](http://ncase.me/trust/)
 
