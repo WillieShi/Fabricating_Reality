@@ -1,8 +1,8 @@
 Fabricating Reality
 ![image](https://user-images.githubusercontent.com/27041114/233923529-ff63b368-ae82-4315-9402-c6a77461fbeb.png)
 
-
-#	PLAY IT HERE: [http://ncase.me/trust/](http://ncase.me/trust/)
+This project was heavily adapted from Nicky Cases' Evolution of Trust [https://github.com/ncase/trust](https://github.com/ncase/trust/)
+#	PLAY IT HERE: [https://lucky-phoenix-9ce30d.netlify.app/](https://lucky-phoenix-9ce30d.netlify.app/)
 
 *Fabricating Reality"* is dedicated to the public domain, and is made thanks to the many Creative Commons & open source resources out there! Here is a full list of music, sounds, and code used:
 
