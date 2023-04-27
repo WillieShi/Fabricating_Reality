@@ -39,6 +39,9 @@ function Movie(config){
 	//Profile Boxes
 	var profiles = new PIXI.Container();
 	var graphics = new PIXI.Graphics();
+
+	var rectBob = new PIXI.Rectangle(500, 0, 200, 300);
+	
 	graphics.beginFill(0x1099bb);
 	graphics.lineStyle(2, 0x000000);
 	graphics.drawRect(0, 0, 200, 300);
@@ -66,17 +69,32 @@ function Movie(config){
 	app.stage.addChild(profiles);
 
 
-	var wordBubbleContainer = createWordBubbleContainer(300, 100, "Military");
-	var wordBubbleContainer2 = createWordBubbleContainer(400, 100, "Liberal");
-	var wordBubbleContainer3 = createWordBubbleContainer(200, 100, "Millenial");
-	var wordBubbleContainer4 = createWordBubbleContainer(250, 150, "Boomer");
-	var wordBubbleContainer5 = createWordBubbleContainer(350, 150, "Parent");
+	var wordBubbleContainer = createWordBubbleContainer(300, 100, "Military", app.stage.children);
+	var wordBubbleContainer2 = createWordBubbleContainer(400, 100, "Liberal", app.stage.children);
+	var wordBubbleContainer3 = createWordBubbleContainer(200, 100, "Millenial", app.stage.children);
+	var wordBubbleContainer4 = createWordBubbleContainer(250, 150, "Boomer", app.stage.children);
+	var wordBubbleContainer5 = createWordBubbleContainer(350, 150, "Parent", app.stage.children);
 	app.stage.addChild(wordBubbleContainer);
 	app.stage.addChild(wordBubbleContainer2);
 	app.stage.addChild(wordBubbleContainer3);
 	app.stage.addChild(wordBubbleContainer4);
 	app.stage.addChild(wordBubbleContainer5);
 	
+	
+	app.ticker.add(gameLoop);
+	
+	function gameLoop(){
+		console.log(wordBubbleContainer.getChildByName("hitbox").x)
+		console.log(wordBubbleContainer.getChildByName("hitbox").y)
+		console.log(wordBubbleContainer.getChildByName("hitbox").width)
+		console.log(wordBubbleContainer.getChildByName("hitbox").height)
+		if(hitTestRectangle(wordBubbleContainer.getChildByName("hitbox"), 
+		wordBubbleContainer2.getChildByName("hitbox")))
+		{
+			console.log("COLLISION");
+		}
+	}
+
 	self.add = function(){
 		_add(self);
 	};
@@ -104,7 +122,7 @@ function MainChar(config){
 
 }
 
-function createWordBubbleContainer(x, y, text) {
+function createWordBubbleContainer(x, y, text, objects) {
     var wordBubbleContainer = new PIXI.Container();
 
     var graphics = new PIXI.Graphics();
@@ -136,6 +154,12 @@ function createWordBubbleContainer(x, y, text) {
     // set the container's position
     container.x = x;
     container.y = y;
+	
+	// create a new container to detect the hitbox
+	var hb = new PIXI.Container();
+	hb.x = x;
+	hb.y = y;
+	hb.name = "hitbox";
 
     // enable dragging of the container with mouse click
     container.interactive = true;
@@ -144,6 +168,13 @@ function createWordBubbleContainer(x, y, text) {
     container.on('mousedown', function(event) {
         this.dragging = true;
         this.data = event.data;
+
+		console.log(objects)
+		// if(hitTestRectangle(container, 
+		// 	wordBubbleContainer2.getChildByName("hitbox")))
+		// 	{
+		// 		console.log("COLLISION");
+		// 	}
     });
 
     container.on('mouseup', function() {
@@ -158,9 +189,62 @@ function createWordBubbleContainer(x, y, text) {
             this.y = newPosition.y - this.height/2;
         }
     });
+	
 
     // add the container to the word bubble container
     wordBubbleContainer.addChild(container);
+	wordBubbleContainer.addChild(hb);
 
     return wordBubbleContainer;
 }
+
+function hitTestRectangle(r1, r2) {
+
+	//Define the variables we'll need to calculate
+	let hit, combinedHalfWidths, combinedHalfHeights, vx, vy;
+  
+	//hit will determine whether there's a collision
+	hit = false;
+  
+	//Find the center points of each sprite
+	r1.centerX = r1.x + r1.width / 2;
+	r1.centerY = r1.y + r1.height / 2;
+	r2.centerX = r2.x + r2.width / 2;
+	r2.centerY = r2.y + r2.height / 2;
+  
+	//Find the half-widths and half-heights of each sprite
+	r1.halfWidth = r1.width / 2;
+	r1.halfHeight = r1.height / 2;
+	r2.halfWidth = r2.width / 2;
+	r2.halfHeight = r2.height / 2;
+  
+	//Calculate the distance vector between the sprites
+	vx = r1.centerX - r2.centerX;
+	vy = r1.centerY - r2.centerY;
+  
+	//Figure out the combined half-widths and half-heights
+	combinedHalfWidths = r1.halfWidth + r2.halfWidth;
+	combinedHalfHeights = r1.halfHeight + r2.halfHeight;
+  
+	//Check for a collision on the x axis
+	if (Math.abs(vx) < combinedHalfWidths) {
+  
+	  //A collision might be occurring. Check for a collision on the y axis
+	  if (Math.abs(vy) < combinedHalfHeights) {
+  
+		//There's definitely a collision happening
+		hit = true;
+	  } else {
+  
+		//There's no collision on the y axis
+		hit = false;
+	  }
+	} else {
+  
+	  //There's no collision on the x axis
+	  hit = false;
+	}
+  
+	//`hit` will be either `true` or `false`
+	return hit;
+  };
